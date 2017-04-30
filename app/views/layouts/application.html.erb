@@ -7,8 +7,39 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+<body>
+<nav class="navbar navbar-default">
+   <div  class="container">
+    <div class="navbar-header">
+        <% link_to "projects", root_path, Class: "navbar-brand" %>
+    </div>
+     <ul class= "nav navbar-nav  ">
+     <li>
+        <%= link_to "Sign out", destroy_user_session_path %>
+     </li>
+      
+       <li><%= link_to 'admin','admin' %></li>
+       <li><%= link_to 'projects','/projects' %></li> 
 
-  <body>
+       <li><%= link_to 'Category','/categories' %></li> 
+       
+       <% if current_user.present?%>
+       <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+        <% else %>
+         <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+  <% end %>
+     </ul>
+     <% if user_signed_in?%>
+     <%=link_to "New project",new_project_path,class: " navbar-text-navbar-link navbar-right"%>
+     <%=link_to "New category",new_category_path,class: " navbar-text-navbar-link navbar-right"%>
+     <%end%>
+    </div>
+ </nav>
+
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
     <%= yield %>
   </body>
 </html>
