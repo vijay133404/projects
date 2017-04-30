@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @category.name %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @category.desc %>
+</p>
+
+<div>
+<p>
+<h3> Projects under this category </h3>
+<%= Project.where(category_id: @category.id).each do |project| %>
+<li> <%= project.name %> </li>
+<% end %>
+</p>
+</div>
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>
+
