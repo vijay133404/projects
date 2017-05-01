@@ -11,24 +11,34 @@
 <nav class="navbar navbar-default">
    <div  class="container">
     <div class="navbar-header">
-        <% link_to "projects", root_path, Class: "navbar-brand" %>
+       
     </div>
      <ul class= "nav navbar-nav  ">
-     <li>
-        <%= link_to "Sign out", destroy_user_session_path %>
-     </li>
+     
+       <% if current_user.present?%>
+       <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+        <% else %>
+        <li> <%= link_to "Sign up", new_user_registration_path %></li>
+        <li><%= link_to "sign in", new_user_session_path %></li>
+  <% end %>
+    
       
        <li><%= link_to 'admin','admin' %></li>
        <li><%= link_to 'projects','/projects' %></li> 
 
        <li><%= link_to 'Category','/categories' %></li> 
        
-       <% if current_user.present?%>
-       <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-        <% else %>
-         <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-  <% end %>
+       
      </ul>
+
+     <%=form_tag "/projects" ,:method=>"GET" do %> 
+
+      <%= text_field_tag :search, params[:search] , :placeholder => "Type here to search"%> 
+      <%= text_field_tag :start_date, params[:start_date] , :placeholder => "Start date", :id=>"start-date"%> 
+      <%= text_field_tag :end_date, params[:end_date] , :placeholder => "end_date" , :id=>"end-date"%> 
+      <%= submit_tag "Search", :class=>"btn btn-success"%> 
+    <%end%>
+
      <% if user_signed_in?%>
      <%=link_to "New project",new_project_path,class: " navbar-text-navbar-link navbar-right"%>
      <%=link_to "New category",new_category_path,class: " navbar-text-navbar-link navbar-right"%>
@@ -43,3 +53,9 @@
     <%= yield %>
   </body>
 </html>
+<script> 
+  $( function() { 
+    $("#start-date" ).datepicker({ dateFormat: 'dd-mm-yy' }); 
+    $("#end-date" ).datepicker({ dateFormat: 'dd-mm-yy' }); 
+  } ); 
+  </script>

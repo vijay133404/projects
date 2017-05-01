@@ -20,13 +20,18 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
-
+  <div class="field">
+    <%= f.label :document %>
+    <%= f.file_field :document %>
+  </div>
+  
+   
    <div class="field">
     <%= select_tag(:category_id, options_for_select(@categories), :prompt => 'Select one!') %>
    </div>
    
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit%>
   </div>
 <%end%>

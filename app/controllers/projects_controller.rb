@@ -5,9 +5,18 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    if params[:search].present? 
+
+      @projects= Project.where('name LIKE ? OR name LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
+     
+    elsif params[:start_date].present? && params[:end_date].present? 
+      @projects = Project.where('created_at >= ? AND created_at <=?', params[:start_date].to_date, params[:end_date].to_date)  
+    else 
+      @projects=Project.all 
+    end
   end
 
+#Candidate.find(vote.candidate_id).name
   # GET /projects/1
   # GET /projects/1.json
   def show
@@ -76,6 +85,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description, :category_id)
+      params.require(:project).permit(:name, :description,:document,:category_id)
     end
 end
