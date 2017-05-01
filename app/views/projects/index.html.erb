@@ -27,7 +27,11 @@
         <td><%= project.name %></td>
         <td><%= project.description %></td>
         <td><%= link_to Category.find(project.category_id).name, category_path(project.category_id) %></td>
-        <td><%=project.document%></td>
+        <td><% if project.document.present? %> 
+        <a href="<%=project.document.url %>"><%= project.document.file.original_filename %></a>
+       </td>
+         <%end%>
+
         <td><%= link_to 'Show', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>

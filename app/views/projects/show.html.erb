@@ -16,9 +16,12 @@
 </p>
   <strong>document:</strong>
 <% if @project.document.present? %>
+
 <a href="<%=@project.document.url %>"><%=  @project.document.file.original_filename %></a>
   <% end %>
  </p>
+ 
+
       <h2>Comments</h2>
        <div class="comments-container">
         <%= render 'comments/comments'%>
