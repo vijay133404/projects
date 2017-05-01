@@ -232,7 +232,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
-  bootstrap-sass (~> 3.3, >= 3.3.7)
+  bootstrap-sass (~> 3.3, >= 3.3.7bootstrap)
   byebug
   coffee-rails (~> 4.2)
   devise
