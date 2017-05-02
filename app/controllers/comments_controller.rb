@@ -29,7 +29,7 @@ def edit
     end
   private
     def comment_params
-      params.require(:comment).permit(:commenter, :body,:project_id)
+      params.require(:comment).permit(:commenter, :body,:project_id,:image)
     end
 end
 

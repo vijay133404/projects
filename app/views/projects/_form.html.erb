@@ -30,6 +30,13 @@
     <%= select_tag(:category_id, options_for_select(@categories), :prompt => 'Select one!') %>
    </div>
    
+<div>
+   <div class="field">
+
+    <% f.label :status %>
+    <%= f.select "status", options_for_select([ "Aavlable", "Panding" , "Completed"]),:prompt => 'Select one!'%>
+</div>
+    
 
   <div class="actions">
     <%= f.submit%>

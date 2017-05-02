@@ -1,5 +1,12 @@
 <%= form_for :reply, url: "/projects/#{@project.id}/comments/#{comment.id}/replies",:remote=>true do |f| %>
    <%= f.hidden_field :comment_id,:value=> comment.id %>
+
    <%= f.text_field :body %>
-   <%= f.submit  %>
+
+  <%= f.file_field :image %>   
+  
+   <%= f.submit "reply"  %>
+
+   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
 <% end %>

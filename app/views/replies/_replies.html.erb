@@ -1,5 +1,6 @@
 <%@replies.each do |reply|%>
   <p><strong>Reply:</strong>
   <%=reply.body%>
-  </p>
+ <%=image_tag reply.image,:height=>"150", :width=>"150" %>    
+</p>
   <%end%>

@@ -13,7 +13,7 @@ class RepliesController < ApplicationController
   end
 
   def create
-    @reply =  Reply.new(:body=>params[:reply][:body],:comment_id=>params[:reply][:comment_id])
+    @reply =  Reply.new(:body=>params[:reply][:body],:comment_id=>params[:reply][:comment_id],:image=>params[:reply][:image])
     @reply.save
     flash[:notice]= "replies created"
     @replies = Reply.where(:comment_id=>params[:reply][:comment_id])
@@ -23,7 +23,7 @@ class RepliesController < ApplicationController
 
     private
     def reply_params
-      params.require(:reply).permit( :body)
+      params.require(:reply).permit( :body,:image)
     end
 end
 

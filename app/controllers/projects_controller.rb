@@ -4,17 +4,17 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   # GET /projects.json
-  def index
-    if params[:search].present? 
+ def index
+       if params[:search].present?
+        @projects = Project.where('name LIKE ? OR description LIKE ? ', "%#{params[:search]}%","%#{params[:search]}%")
 
-      @projects= Project.where('name LIKE ? OR name LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
-     
-    elsif params[:start_date].present? && params[:end_date].present? 
-      @projects = Project.where('created_at >= ? AND created_at <=?', params[:start_date].to_date, params[:end_date].to_date)  
-    else 
-      @projects=Project.all 
-    end
-  end
+      elsif params[:category].present?
+           category=Category.find(params[:category])
+           @projects = category.projects.where('name LIKE ? OR description LIKE ? ', "%#{params[:category]}%","%#{params[:search]}%")
+      else
+        @projects = Project.all
+     end
+  end 
 
 #Candidate.find(vote.candidate_id).name
   # GET /projects/1
@@ -25,6 +25,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new 
     @project = Project.new 
+    
     @categories = Category.all.map{|c| [ c.name, c.id ] }
 end
 
@@ -39,7 +40,6 @@ end
     @project = Project.new(project_params)
 
    @project.category_id = params[:category_id] 
-
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -85,6 +85,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description,:document,:category_id)
+      params.require(:project).permit(:name, :description,:document,:category_id,:status)
     end
 end

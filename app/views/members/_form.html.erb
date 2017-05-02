@@ -1,0 +1,8 @@
+<%= form_for ([@project, @member]) do |m| %>
+<%= m.label :user %> 
+<%= m.select(:user_id, User.all.collect {|u| [u.email, u.id]}, :prompt => 'Select User') %>
+
+<%= m.hidden_field :project_id, :value=> @project.id %>
+
+<%= m.submit %>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501093247) do
+ActiveRecord::Schema.define(version: 20170502115221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20170501093247) do
     t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image"
     t.index ["project_id"], name: "index_comments_on_project_id", using: :btree
   end
 
@@ -67,6 +68,15 @@ ActiveRecord::Schema.define(version: 20170501093247) do
     t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_members_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_members_on_user_id", using: :btree
   end
 
   create_table "projects", force: :cascade do |t|
@@ -79,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170501093247) do
     t.string   "image"
     t.integer  "project_id"
     t.string   "document"
+    t.string   "status"
   end
 
   create_table "replies", force: :cascade do |t|
@@ -86,6 +97,7 @@ ActiveRecord::Schema.define(version: 20170501093247) do
     t.integer  "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image"
     t.index ["comment_id"], name: "index_replies_on_comment_id", using: :btree
   end
 
@@ -107,5 +119,7 @@ ActiveRecord::Schema.define(version: 20170501093247) do
   end
 
   add_foreign_key "comments", "projects"
+  add_foreign_key "members", "projects"
+  add_foreign_key "members", "users"
   add_foreign_key "replies", "comments"
 end

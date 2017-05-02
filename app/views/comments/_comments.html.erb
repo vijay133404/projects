@@ -1,3 +1,4 @@
+
 <%@project.comments.each do |comment|%>  
 <p>
   <strong>Commenter:</strong>
@@ -8,7 +9,10 @@
   <strong>Comment:</strong>
   <%= comment.body %>
 </p>
-
+<p>
+<strong>image:</strong>
+ <%=image_tag comment.image,:height=>"150", :width=>"150" %>    
+</p>
 <p>
   <%= link_to 'Destroy Comment', [comment.project, comment],
                method: :delete,
@@ -25,5 +29,4 @@
 </div>
 
   <%= render 'replies/form', :comment=>comment %> 
-
 <%end%>
