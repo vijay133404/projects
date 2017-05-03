@@ -1,3 +1,4 @@
+<div class="container">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -17,11 +18,11 @@
   <strong>document:</strong>
 <% if @project.document.present? %>
 
-<a href="<%=@project.document.url %>"><%=  @project.document.file.original_filename %></a>
+<a href="<%=@project.document.url %>"><%=@project.document.file.original_filename %></a>
   <% end %>
  </p>
  <p>
- <%= link_to "Add Member", member_path,:class =>"btn btn-success " %>
+ <%= link_to "Add Member", new_project_member_path(@project) ,:class =>"btn btn-success " %>
 </p>
 
       <h2>Comments</h2>
@@ -37,3 +38,4 @@
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+</div>

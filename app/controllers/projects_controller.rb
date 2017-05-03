@@ -6,14 +6,15 @@ class ProjectsController < ApplicationController
   # GET /projects.json
  def index
        if params[:search].present?
-        @projects = Project.where('name LIKE ? OR description LIKE ? ', "%#{params[:search]}%","%#{params[:search]}%")
+        @projects = Project.where('name LIKE ? OR description LIKE ? AND active = ? ', "%#{params[:search]}%","%#{params[:search]}%",true)
 
       elsif params[:category].present?
            category=Category.find(params[:category])
-           @projects = category.projects.where('name LIKE ? OR description LIKE ? ', "%#{params[:category]}%","%#{params[:search]}%")
+           @projects = category.projects.where('name LIKE ? OR description LIKE ? AND active = ? ', "%#{params[:category]}%","%#{params[:search]}%",true)
       else
-        @projects = Project.all
+        @projects = Project.where(:active =>true)
      end
+
   end 
 
 #Candidate.find(vote.candidate_id).name
@@ -85,6 +86,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description,:document,:category_id,:status)
+      params.require(:project).permit(:name, :description,:document,:category_id,:status,:active)
     end
 end

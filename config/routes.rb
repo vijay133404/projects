@@ -3,18 +3,17 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
    root 'projects#index'
-    get'member' =>'projects#member'
+  
   resources :categories
   resources :projects
 
 resources :projects do
   resources :members
 
-
   resources :comments
 
   resources :comments do
       resources :replies
-end
+  end
  end
 end

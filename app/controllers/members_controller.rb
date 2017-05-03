@@ -8,8 +8,13 @@ def new
 end
 def create
 	@project = Project.find(params[:project_id])
-    @member = @project.members.create(comment_params)
+    @member = @project.members.create(member_params)
+    @member.save
     redirect_to projects_path(@project)
+end
+def show
+	@project = Project.find(params[:project_id])
+	@member= Member.find(params[:id])
 end
 
 
