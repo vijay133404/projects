@@ -55,7 +55,7 @@
      <%= f.label :category ,:class=>"col-md-4 control-label"%>
      <div class="col-md-6 inputGroupContainer">
      <div class="input-group">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+     <span class="input-group-addon"><i class="glyphicon glyphicon-saved"></i></span>
      <%= select_tag(:category_id, options_for_select(@categories), :prompt => 'Select category!',:class=>"form-control") %>
    </div>
    </div>
@@ -67,7 +67,7 @@
      <%=f.label :status,:class=>"col-md-4 control-label" %>
      <div class="col-md-6 inputGroupContainer">
      <div class="input-group">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+     <span class="input-group-addon"><i class="glyphicon glyphicon-collapse-up"></i></span>
      <%= f.select "status", options_for_select([ "Aavlable", "Panding" , "Completed"]),:class=>"form-control",:prompt => 'Select one!'%>
    </div>
    </div>

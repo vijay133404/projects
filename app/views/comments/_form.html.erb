@@ -1,5 +1,5 @@
 
-<%= form_for([@project, @project.comments.build],:remote=>true,:class=>"form-horizontal")  do |f| %>
+<%= form_for([@project, @project.comments.build],:remote=>true)  do |f| %>
 <div class="container">
 <fieldset>
 
@@ -34,7 +34,7 @@
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-    <%= f.file_field :image,:class=>"form-control",:placeholder => " image" %>
+    <%= f.file_field :image,:class=>"form-control",:placeholder =>" image",:class => "img-rounded" %>
     </div>
   </div>
 </div>
@@ -54,3 +54,5 @@
 <% end %>
 </fieldset>
 </div>
+
+
