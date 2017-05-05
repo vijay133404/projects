@@ -1,19 +1,56 @@
 
-<%= form_for([@project, @project.comments.build],:remote=>true)  do |f| %>
-  <p>
-    <%= f.label :commenter %><br>
-    <%= f.text_field :commenter %>
-  </p>
-  <p>
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </p>
-  <p>
-  <%= f.label :image %>
-  <%= f.file_field :image %>   
-  </p>
-  <p>
-    <%= f.submit %>
-</p>
+<%= form_for([@project, @project.comments.build],:remote=>true,:class=>"form-horizontal")  do |f| %>
+<div class="container">
+<fieldset>
+
+
+<div class="form-group">
+    <%= f.label :commenter,:class=>"col-md-2 control-label" %>
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <%= f.text_field :commenter,:class=>"form-control",:placeholder => " commenter" %>
+    </div>
+  </div>
+</div>
+ 
+ <br><br>
+  
+  
+  <div class="form-group">
+    <%= f.label :body,:class=>"col-md-2 control-label" %>
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <%= f.text_area :body,:class=>"form-control",:placeholder => " body" %>
+    </div>
+  </div>
+</div>
+ 
+  <br><br><br>
+
+    <div class="form-group">
+    <%= f.label :image,:class=>"col-md-2 control-label" %>
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <%= f.file_field :image,:class=>"form-control",:placeholder => " image" %>
+    </div>
+  </div>
+</div>
+
+  <br><br>
+
+  <div class="form-group">
+        <label class="col-md-2 control-label"></label>
+        <div class="col-md-6  inputGroupContainer">
+
+         <%= f.submit %>
+          </div>
+        </div>
+        <br></br>
+
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 <% end %>
+</fieldset>
+</div>

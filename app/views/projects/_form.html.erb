@@ -1,6 +1,8 @@
 
 <%= form_for(project,:class=>"form-horizontal") do |f| %>
-  <div class="container">
+
+<fieldset>
+
   <% if project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -12,64 +14,184 @@
       </ul>
     </div>
   <%end%>
-<div class="form-group has-success">
- 
-  <div class="col-mini-3">
-      <%= f.label :name,:class=>"col-xs-2 control-label" %>
-      <%= f.text_field :name,:class=>"form-control" %>
-  </div>
-  </div>
-<br>
-  
-  <div class="form-group has-success">
-    <%= f.label :description,:class=>"col-xs-2 control-label"%>
-    <div class="col-mini-3">
-    <%= f.text_field :description ,:class=>"form-control" %>
-  </div>
-  </div>
-<div class="form-group has-success">
 
-  <div class="col-mini-3">
-    <%= f.label :document,:class=>"col-xs-2 control-label" %>
-    <%= f.file_field :document ,:class=>"form-control"%>
+<div class="form-group">
+    <%= f.label :name,:class=>"col-md-4 control-label" %>
+  <div class="col-md-6 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <%= f.text_field :name,:class=>"form-control",:placeholder => " Name" %>
+    </div>
   </div>
 </div>
-   <div class="form-group has-success">
-
-  <div class="col-mini-3">
+ 
+<br><br>
   
-     <%= f.label :category ,:class=>"col-xs-2 control-label"%>
+<div class="form-group">
+  <%= f.label :description,:class=>"col-md-4 control-label" %>
+  <div class="col-md-6 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+    <%= f.text_field :description,:class=>"form-control",:placeholder => " description" %>
+    </div>
+  </div>
+</div>
+ <div>
+<br><br>
+
+ <div class="form-group">
+  <%= f.label :document,:class=>"col-md-4 control-label" %>
+  <div class="col-md-6 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+    <%= f.file_field :document,:class=>"form-control" %>
+    </div>
+  </div>
+</div>
+
+<br><br>
+
+  <div class="form-group">
+     <%= f.label :category ,:class=>"col-md-4 control-label"%>
+     <div class="col-md-6 inputGroupContainer">
+     <div class="input-group">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      <%= select_tag(:category_id, options_for_select(@categories), :prompt => 'Select category!',:class=>"form-control") %>
    </div>
    </div>
-
-   <div class="form-group has-success">
-
-  <div class="col-mini-3">
-    <br>
-     <%=f.label :status,:class=>"col-xs-2 control-label" %>
-     <%= f.select "status", options_for_select([ "Aavlable", "Panding" , "Completed"]),:prompt => 'Select one!',:class=>"form-control"%>
-</div>
-</div>
-      
-  <div class="field">
-  
-   <%= f.label :Active ,:class=>"col-xs-2 control-label"%>
-   <td>
-   <%= f.label :active, "Yes", :value => "true" %> 
-   <%= f.radio_button :active, true,:checked => true %> 
-   <%= f.label :active, "No", :value => "false" %> 
-   <%= f.radio_button :active, false, :checked => true %>
-   </td>
    </div>
-  <div class="form-group has-success">
 
-  <div class="col-mini-3">
-  
-    <%= f.submit :class=>"btn btn-success"%>
-    </div>
-    </div>
-    
-  
+   <br><br>
+
+  <div class="form-group">
+     <%=f.label :status,:class=>"col-md-4 control-label" %>
+     <div class="col-md-6 inputGroupContainer">
+     <div class="input-group">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+     <%= f.select "status", options_for_select([ "Aavlable", "Panding" , "Completed"]),:class=>"form-control",:prompt => 'Select one!'%>
+   </div>
+   </div>
+   </div>
+
+ <br><br>
+
+  <div class="form-group">
+        <label class="col-md-4 control-label">Active</label>
+        <div class="col-md-6  inputGroupContainer">
+     <%= f.label :active, "Yes", :value => "true"  %>
+     <%= f.radio_button :active, true ,:checked=>true%>
+     <%= f.label :active, "No", :value => "false" %>
+    <%= f.radio_button :active, false, :checked => true %>
+       </div>
+        </div>
+    </br></br>
+
+
+          <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-6  inputGroupContainer">
+
+         <%= f.submit :class=>"btn btn-success" %>
+          </div>
+        </div>
+        <br></br>
+
   
 <%end%>
+
+</fieldset>
+<script type="text/javascript">
+ 
+   $(document).ready(function() {
+    $('#new_project').bootstrapValidator({
+        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            "project[name]" :{
+                validators: {
+                        stringLength: {
+                        min: 2,
+                    },
+                        notEmpty: {
+                        message: 'Please supply your name'
+                    }
+                }
+            },
+
+             "project[description]" :{
+                validators: {
+                     stringLength: {
+                        min: 2,
+                    },
+                    notEmpty: {
+                        message: 'Please supply your description'
+                    }
+                }
+            },
+
+            "project[document]" :{
+                validators: {
+                    notEmpty: {
+                        message: 'Please select your video'
+                    }
+                }
+            },
+
+            "category_id" :{
+                validators: {
+                    notEmpty: {
+                        message: 'Please supply your select categories'
+                    },
+
+                }
+            },
+               "project[status]" : {
+                validators: {
+                    notEmpty: {
+                        message: 'Please supply your select status'
+                    },
+
+                }
+            },
+          
+               "project[active]" : {
+                validators: {
+                    notEmpty: {
+                        message: 'Please supply your select active'
+                    },
+
+                }
+            },
+  
+        
+      
+            
+            }
+        })
+    
+  
+        .on('success.form.bv', function(e) {
+            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+                $('#new_blog').data('bootstrapValidator').resetForm();
+
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                console.log(result);
+            }, 'json');
+        });
+});
+
+</script>
